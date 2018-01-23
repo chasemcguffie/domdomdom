@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     
 document.getElementById("myBtn").addEventListener("click", function(item){
-    //item.target.style.backgroundColor = "green";
     var newElement = document.createElement('div');
     var numberOfChildren = document.getElementById("boxDiv").childElementCount;
     newElement.className = ("box"); newElement.id = (numberOfChildren);
@@ -30,37 +29,39 @@ document.getElementById("myBtn").addEventListener("click", function(item){
     var h = document.createElement ("H2");
     var boxId = document.createTextNode(numberOfChildren);
     boxId.id = (numberOfChildren + "txt"); boxId.className = ("boxNumber")
+    for (i = 0; i < document.getElementById('boxDiv').childElementCount + 1; i++);
     h.appendChild (boxId);
     newElement.appendChild(h);
     boxDiv.appendChild(newElement);
     
 
-    Array.from(document.getElementsByClassName("box")).forEach((item)=>{
-        item.addEventListener("click", () => {
-            item.style.backgroundColor = (getRandomColor());
-        });
-        newElement.addEventListener("pointerover", () => {
-            h.style.visibility = "visible";
-        })
-        newElement.addEventListener("pointerout",  () => {
-            h.style.visibility = "hidden";
-        })
-    newElement.addEventListener("dblclick", () => {
-            if (numberOfChildren % 2 === 0) {
-                if( + 1 == null) {
-                    window.alert("Aint no box there")
-                } else {
-            document.getElementById(numberOfChildren + 1).remove(this);
-            }
-            if (numberOfChildren % 2 === 1) {
-                if(numberOfChildren - 1 < 0) {
-                    window.alert('aint no box there either')
-                } else {
-                    document.getElementById(numberOfChildren - 1).remove(this);
-                }
+Array.from(document.getElementsByClassName("box")).forEach((item)=>{
+    item.addEventListener("click", () => {
+        item.style.backgroundColor = (getRandomColor());
+    });
+    newElement.addEventListener("pointerover", () => {
+        h.style.visibility = "visible";
+    })
+    newElement.addEventListener("pointerout",  () => {
+        h.style.visibility = "hidden";
+})
+});
+document.getElementById(numberOfChildren).addEventListener("dblclick", () => {
+    if (newElement.id % 2 == 0) {    
+        if (newElement.nextElementSibling == null) 
+        {
+        alert('does not exist!');
+        } else if (numberOfChildren !== i) {
+        document.getElementById(numberOfChildren).nextElementSibling.remove(this);
+        }
+    } else if (newElement.id % 2 == 1) {
+        if (newElement.previousElementSibling === null) 
+        {
+        alert('does not exist!'); 
+        } else {
+        document.getElementById(numberOfChildren).previousElementSibling.remove(this);
         }
     }
+    })
 });      
-});
-});
 });
